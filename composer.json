@@ -1,0 +1,16 @@
+{
+  "name": "bit/dhv-jugend",
+  "description": "WP site package (plugin) for www.dhv-jugend.de",
+  "license": "GPL-2.0",
+  "authors": [
+    {
+      "name": "Christoph Bessei",
+      "email": "wp-dhv_jugend@bessei-it.eu"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "BIT\\DhvJugend\\": "src/"
+    }
+  }
+}

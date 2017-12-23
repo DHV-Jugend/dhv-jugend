@@ -60,6 +60,16 @@ class RegistrationForm
                 [$this, 'allowedFields_' . $cb]
             );
         }
+
+        add_filter('fum_get_input_field', [$this, 'addInputFields']);
+    }
+
+
+    public function addInputFields($inputFields)
+    {
+        $inputFields = array_merge($inputFields, static::generateParachutePackSeminarFields());
+        $inputFields = array_merge($inputFields, static::generateSivFields());
+        return $inputFields;
     }
 
     /**

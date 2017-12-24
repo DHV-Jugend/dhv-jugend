@@ -62,6 +62,7 @@ class RegistrationForm
         }
 
         add_filter('fum_get_input_field', [$this, 'addInputFields']);
+        add_filter('fum_form_after_field_validation', [$this, 'fum_form_after_field_validation'], 10, 2);
     }
 
 
@@ -70,6 +71,46 @@ class RegistrationForm
         $inputFields = array_merge($inputFields, static::generateParachutePackSeminarFields());
         $inputFields = array_merge($inputFields, static::generateSivFields());
         return $inputFields;
+    }
+
+    /**
+     * @param bool $fieldValidationResult
+     * @param \Fum_Html_Form $form
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    public function fum_form_after_field_validation($fieldValidationResult, \Fum_Html_Form $form)
+    {
+        if ($form->get_unique_name() === \Fum_Conf::$fum_event_register_form_unique_name) {
+            $isPedestrian = false;
+
+            foreach ($form->get_input_fields() as $inputField) {
+                if ($inputField->get_unique_name() === \Fum_Conf::$fum_input_field_aircraft) {
+                    $aircraft = $inputField->get_value();
+                    if ($aircraft == 'fussgaenger') {
+                        $isPedestrian = true;
+                    }
+                }
+            }
+
+            if (!$isPedestrian) {
+                // Force validation
+                foreach ($form->get_input_fields() as $inputField) {
+                    if ($inputField->get_unique_name() === \Fum_Conf::$fum_input_field_license_number ||
+                        $inputField->get_unique_name() === \Fum_Conf::$fum_input_field_dhv_member_number) {
+                        $backup = $inputField->get_required();
+                        $inputField->set_required(true);
+                        if (is_wp_error($inputField->validate(true))) {
+                            $fieldValidationResult = false;
+                        }
+                        $inputField->set_required($backup);
+                    }
+                }
+            }
+        }
+
+        return $fieldValidationResult;
     }
 
     /**
@@ -142,7 +183,7 @@ class RegistrationForm
             Conf::PREFIX . 'glider_type',
             Conf::PREFIX . 'glider_type',
             new Html_Input_Type_Enum(Html_Input_Type_Enum::TEXT),
-            'Schirmtyp',
+            'Schirmtyp (Hersteller, Typ, Größe)',
             Conf::PREFIX . 'glider_type',
             true
         );

@@ -1,0 +1,65 @@
+/* DHV Logo einblenden */
+.header-content #searchform .searchform-wrapper {
+  top: 35%;
+  height: auto;
+}
+
+.second_logo {
+  margin-top: 65px;
+  text-align: center;
+}
+
+.second_logo img {
+  width: 80px;
+  height: auto;
+}
+
+/*Hintergrundfarbe des aktiven Dropdown Elements im Menü*/
+*.main-navigation ul ul a {
+  background-color: #317dbf;
+}
+
+/*Hintergrundfarbe des aktiven Dropdown Elements im Menü beim Hovern*/
+.main-navigation ul ul a:hover {
+  background-color: #3e9ff3;
+}
+
+/*Rahmenfarbe des aktiven Dropdown Elements im Menü*/
+.main-navigation ul ul li {
+  border-bottom: 1px solid #fff;
+}
+
+.menu-primary .sub-menu {
+  border: 1px solid #fff;
+}
+
+/* Fixed die verzogene Bilder in der Tiled Image Gallery */
+.tiled-gallery-item img {
+  height: auto !important;
+}
+
+/* Verhindert dass die Menüleiste mit nach unten scrollt */
+#wrapper .sticky-nav {
+  position: static !important;
+}
+
+/* Drop Down Einträge breiter machen */
+.menu-box ul ul {
+  width: auto;
+}
+
+/* 300px Breite statt 212px */
+.menu-box ul ul li {
+  width: 300px
+}
+
+/* li Breite - 19px (Padding) */
+#header .menu-box ul ul a,
+#header .menu-box ul ul a:visited {
+  width: 281px;
+}
+
+/* Footer Widget Mitte - 100% Breite */
+.footer-widget-area.footer-widget-area-2 {
+  width: 100%;
+}

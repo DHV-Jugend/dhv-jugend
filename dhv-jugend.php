@@ -11,4 +11,4 @@
  * License: GPLv2
  */
 require_once(__DIR__ . '/vendor/autoload.php');
-(new \BIT\DhvJugend\Boostrap())->run();
+(new \BIT\DhvJugend\Bootstrap())->run();
